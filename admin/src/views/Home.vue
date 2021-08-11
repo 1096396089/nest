@@ -1,18 +1,30 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div>
+    <avue-data-tabs :option="option"></avue-data-tabs>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
-  name: "Home",
-  components: {
-    HelloWorld,
+  data() {
+    return {
+      option: {
+        data: [
+          
+        ],
+      },
+    };
   },
+  methods: {
+    async fetchtotal(){
+      const total = await this.$http.get('home/option')
+      this.option.data = total.data.data
+    }
+  },
+  created () {
+    this.fetchtotal()
+  }
 };
 </script>
